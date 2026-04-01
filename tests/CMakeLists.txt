@@ -1,5 +1,3 @@
-enable_testing()
-
 set(CMAKE_BUILD_RPATH_USE_ORIGIN ON)
 
 include(GoogleTest)
