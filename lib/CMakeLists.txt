@@ -72,9 +72,18 @@ endif ()
 
 find_package(tinyxml2 9.0.0 REQUIRED)
 find_package(zstd 1.5.2 REQUIRED)
+
+if (${zstd_FOUND})
+        if (zstd::libzstd_static)
+                set(zstd_target zstd::libzstd_static)
+        elseif (zstd::libzstd_shared)
+                set(zstd_target zstd::libzstd_shared)
+        endif()
+endif()
+
 target_link_libraries(tinytmx PRIVATE
         tinyxml2::tinyxml2
-        zstd::libzstd_static # TODO
+        ${zstd_target}
         project_options
         # project_warnings
         )
