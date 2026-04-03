@@ -14,9 +14,36 @@ namespace tinyxml2 {
 }
 
 namespace tinytmx {
-    class AnimationFrame;
-
     class Object;
+
+    //-------------------------------------------------------------------------
+    /// Class containing information about an animated tile. This includes the
+    /// duration of each frame and the various ids of each frame in the
+    /// animation.
+    //-------------------------------------------------------------------------
+    class AnimationFrame {
+    public:
+        /// This constructor shouldn't be used, ideally.
+        // FIXME: just default maybe
+        AnimationFrame() :
+                tileID(-1), duration(0) {
+        }
+
+        /// Create a new animation frame with a specified tile id and duration.
+        AnimationFrame(int tileID, unsigned int duration) :
+                tileID(tileID), duration(duration) {
+        }
+
+        /// Get the tile id of this frame, relative to the containing tileset.
+        [[nodiscard]] int GetTileID() const { return tileID; }
+
+        /// Get the duration of this frame in milliseconds.
+        [[nodiscard]] unsigned int GetDuration() const { return duration; }
+
+    private:
+        int tileID;
+        unsigned int duration;
+    };
 
     //-------------------------------------------------------------------------
     /// A Class to contain the information about every tile in the tileset/tiles
@@ -131,35 +158,6 @@ namespace tinytmx {
 
         tinytmx::PropertySet* properties;
 
-    };
-
-    //-------------------------------------------------------------------------
-    /// Class containing information about an animated tile. This includes the
-    /// duration of each frame and the various ids of each frame in the
-    /// animation.
-    //-------------------------------------------------------------------------
-    class AnimationFrame {
-    public:
-        /// This constructor shouldn't be used, ideally.
-        // FIXME: just default maybe
-        AnimationFrame() :
-                tileID(-1), duration(0) {
-        }
-
-        /// Create a new animation frame with a specified tile id and duration.
-        AnimationFrame(int tileID, unsigned int duration) :
-                tileID(tileID), duration(duration) {
-        }
-
-        /// Get the tile id of this frame, relative to the containing tileset.
-        [[nodiscard]] int GetTileID() const { return tileID; }
-
-        /// Get the duration of this frame in milliseconds.
-        [[nodiscard]] unsigned int GetDuration() const { return duration; }
-
-    private:
-        int tileID;
-        unsigned int duration;
     };
 }
 
