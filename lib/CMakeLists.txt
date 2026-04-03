@@ -70,19 +70,15 @@ elseif (NOT TINYTMX_USE_MINIZ)
 endif ()
 
 
-find_package(tinyxml2 REQUIRED)
-find_package(zstd REQUIRED)
+find_package(tinyxml2 9.0.0 REQUIRED)
+find_package(zstd 1.5.2 REQUIRED)
 
 if (${zstd_FOUND})
         if (zstd::libzstd_static)
                 set(zstd_target zstd::libzstd_static)
         elseif (zstd::libzstd_shared)
                 set(zstd_target zstd::libzstd_shared)
-        else()
-                message(FATAL_ERROR "cannot determine a target for zstd")
         endif()
-else()
-        message(FATAL_ERROR "zstd not found")
 endif()
 
 target_link_libraries(tinytmx PRIVATE
